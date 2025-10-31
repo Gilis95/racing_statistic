@@ -1,0 +1,7 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define PROJECT_WORKING_DIR "@PROJECT_WORKING_DIR@"
+#define PROJECT_ID "@PROJECT_ID@"
+
+#endif

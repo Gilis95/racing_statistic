@@ -1,0 +1,10 @@
+compilation_database_dir: .
+output_directory: diagrams
+diagrams:
+  class:
+    type: class
+    glob:
+      - "wunder-renderer/include/**/*.h"
+    include:
+      namespaces:
+        - ".*"

@@ -1,0 +1,29 @@
+include(cmake/Variables.cmake)
+
+file(GLOB ROOT_SOURCE ${SRC_DIR}/*.cpp)
+file(GLOB ROOT_HEADER ${HDR_DIR}/*.h)
+file(GLOB ROOT_INLINE ${HDR_DIR}/*.hpp)
+
+file(GLOB CORE_SOURCE ${CORE_SRC_DIR}/*.cpp)
+file(GLOB CORE_HEADER ${CORE_HDR_DIR}/*.h)
+file(GLOB CORE_INLINE ${CORE_HDR_DIR}/*.hpp)
+
+file(GLOB EVENT_SOURCE ${EVENT_SRC_DIR}/*.cpp)
+file(GLOB EVENT_HEADER ${EVENT_HDR_DIR}/*.h)
+file(GLOB EVENT_INLINE ${EVENT_HDR_DIR}/*.hpp)
+
+
+set(NOOBSTERS_APPLICATION_HEADERS
+        ${ROOT_HEADER}
+        ${ROOT_INLINE}
+        ${CORE_HEADER}
+        ${CORE_INLINE}
+        ${EVENT_HEADER}
+        ${EVENT_INLINE}
+)
+
+set(NOOBSTERS_APPLICATION_SOURCES
+        ${ROOT_SOURCE}
+        ${CORE_SOURCE}
+        ${EVENT_SOURCE}
+)
