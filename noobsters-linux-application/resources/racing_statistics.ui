@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<interface>
+    <!-- interface-name racing_statistics.ui -->
+    <requires lib="gtk" version="4.12"/>
+    <requires lib="libadwaita" version="1.0"/>
+    <requires lib="gio" version="2.44"/>
+    <object class="AdwApplicationWindow" id="main_window">
+        <property name="default-height">540</property>
+        <property name="default-width">960</property>
+        <property name="destroy-with-parent">True</property>
+        <property name="overflow">visible</property>
+        <child>
+            <object class="GtkBox">
+                <property name="baseline-position">top</property>
+                <property name="orientation">vertical</property>
+                <property name="valign">baseline-fill</property>
+                <child>
+                    <object class="AdwHeaderBar"/>
+                </child>
+                <child>
+                    <object class="GtkColumnView" id="leaderboard-table">
+                        <property name="hadjustment">
+                            <object class="GtkAdjustment"/>
+                        </property>
+                        <property name="model">
+                            <object class="GtkSingleSelection">
+                                <property name="model">
+                                    <object class="GListStore" id="leaderboard-entry-model"/>
+                                </property>
+                                <property name="selected">0</property>
+                            </object>
+                        </property>
+                        <property name="show-column-separators">True</property>
+                        <property name="vadjustment">
+                            <object class="GtkAdjustment"/>
+                        </property>
+                        <property name="valign">baseline-fill</property>
+                        <property name="vexpand">True</property>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="position-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="position-factory"/>
+                                </property>
+                                <property name="id">position</property>
+                                <property name="title" translatable="yes" context="POSITION">Pos.</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="kart_number-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="kart_number-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="KART_NUMBER">Kart</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="nationality-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="nationality-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="NATIONALITY">Nationality</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="contender_name-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="contender_name-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="TEAM_NAME">Team</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="sector1-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="sector1-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="SECTOR1">S1</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="sector2-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="sector2-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="SECTOR2">S2</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="sector3-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="sector3-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="SECTOR3">S3</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="lap_total-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="lap_total-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="LAP_TOTAL">Last Lap</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="gap_to_first-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="gap_to_first-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="GAP_TO_FIRST">Gap</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="gap_to_next-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="gap_to_next-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="GAP_TO_NEXT">Interv.</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="best_lap-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="best_lap-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="BEST_LAP">Best Lap</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="lap_count-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="lap_count-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="LAP_COUNT">Laps</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="stint_total_time-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="stint_total_time-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="STINT_TOTAL_TIME">On track</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="pit_count-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="pit_count-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="PIT_COUNT">Pits</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkColumnViewColumn" id="pit_time-column">
+                                <property name="factory">
+                                    <object class="GtkSignalListItemFactory" id="pit_time-factory"/>
+                                </property>
+                                <property name="title" translatable="yes" context="PIT_TIME">Pit time</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>

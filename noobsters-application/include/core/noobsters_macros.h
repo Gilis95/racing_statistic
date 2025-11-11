@@ -26,6 +26,9 @@
 #define NOOBSTERSLOG_ERROR_AND_BREAK(...)
 #endif
 
+#define _STRINGIFY(x) #x
+#define STRINGIFY(x) _STRINGIFY(x)
+
 // DO NOT delete the volatile keyword, otherwise compiler might delete the
 // instruction
 #define CRASH *(reinterpret_cast<volatile unsigned int*>(0)) = 0xDEAD
@@ -183,19 +186,22 @@ template <typename T>
 using const_ref = std::reference_wrapper<const T>;
 
 template <typename T>
-using optional_const_ref = std::optional<const_ref< T>>;
+using optional_const_ref = std::optional<const_ref<T>>;
 
 template <typename T>
 using optional_ref = std::optional<ref<T>>;
 
 #if defined(__GNUC__) || defined(__clang__)
-#define BEGIN_IGNORE_WARNINGS                                                \
+#define BEGIN_IGNORE_WARNINGS                                                 \
   _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
-      _Pragma("GCC diagnostic ignored \"-Wextra\"")                          \
-          _Pragma("GCC diagnostic ignored \"-Wpedantic\"")                   \
-              _Pragma("GCC diagnostic ignored \"-Wconversion\"")
-_Pragma("GCC diagnostic ignored \"-Wmissing-declarations\"")
-    _Pragma("GCC diagnostic ignored \"-Wdeprecated-literal-operator\"")
+      _Pragma("GCC diagnostic ignored \"-Wextra\"") _Pragma(                 \
+          "GCC diagnostic ignored \"-Wpedantic\"")                           \
+          _Pragma("GCC diagnostic ignored \"-Wconversion\"") _Pragma(        \
+              "GCC diagnostic ignored \"-Wmissing-declarations\"")           \
+              _Pragma(                                                       \
+                  "GCC diagnostic ignored \"-Wdeprecated-literal-operator\"") \
+_Pragma(                                                       \
+"GCC diagnostic ignored \"-Wold-style-cast\"")
 #define END_IGNORE_WARNINGS _Pragma("GCC diagnostic pop")
 #elif defined(_MSC_VER)
 #define BEGIN_IGNORE_WARNINGS \

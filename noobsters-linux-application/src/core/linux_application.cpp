@@ -35,6 +35,7 @@ application::application(int argc, char **argv)
 application::~application() { g_object_unref(m_app); }
 
 int application::run() {
+  m_window->register_sources();
   return g_application_run(G_APPLICATION(m_app), m_argc, m_argv);
 }
 

@@ -40,11 +40,11 @@ std::uint64_t get_current_time() {
   timespec spec{};
   clock_gettime(CLOCK_REALTIME, &spec);
 
-  std::uint64_t epoch_nanosec = spec.tv_sec * k_miliseconds_in_second *
-                                k_microseconds_in_milisecond *
-                                k_nanoseconds_in_microsecond;
+  std::uint64_t epoch_nanosec = static_cast<std::uint64_t>(
+      spec.tv_sec * k_miliseconds_in_second * k_microseconds_in_milisecond *
+      k_nanoseconds_in_microsecond);
 
-  epoch_nanosec += spec.tv_nsec;
+  epoch_nanosec += static_cast<std::uint64_t>(spec.tv_nsec);
 
   return epoch_nanosec /
          (k_nanoseconds_in_microsecond * k_microseconds_in_milisecond);
