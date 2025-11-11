@@ -36,13 +36,17 @@ class main_window_controller : private event_handler<contender_updated>,
   void on_event(const contender_updated&) override;
   void on_event(const contender_created&) override;
 
-  template<typename contender_change_event>
+  template <typename contender_change_event>
   void store_event(const contender_change_event& change_event);
+
+ private:  // visitor functions
+  void operator()(contender_updated);
+  void operator()(contender_created);
 
  private:
   [[nodiscard]] inline event pop_first_event();
   [[nodiscard]] inline bool  is_event_queue_empty() const;
-  inline bool                update_event_flag();
+  inline void                set_event_flag(const bool is_event_available);
 
  private:
   std::atomic_flag m_is_event_available{false};
@@ -55,17 +59,17 @@ class main_window_controller : private event_handler<contender_updated>,
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////////////////////////////////////
-template<typename contender_change_event>
-void main_window_controller::store_event(const contender_change_event& change_event) {
+template <typename contender_change_event>
+void main_window_controller::store_event(
+    const contender_change_event& change_event) {
   {
     std::lock_guard queue_lock(m_change_events_mutex);
 
     m_change_events.emplace(change_event);
   }
 
-  update_event_flag();
+  set_event_flag(!is_event_queue_empty());
   g_main_context_wakeup(nullptr);
 }
 }  // namespace noobsters::linux_platform
